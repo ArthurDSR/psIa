@@ -1,4 +1,4 @@
-# psIa
+# Fluxo newsletter Inteli IA
 
 ## Descrição do Projeto
 
@@ -15,5 +15,5 @@ O **psIa** é um fluxo de automação criado no [n8n](https://n8n.io/) que envia
 ## Tecnologias Utilizadas
 
 - [n8n](https://n8n.io/) — plataforma de automação de fluxos de trabalho
-- Planilha (Google Sheets ou similar) — gerenciamento da lista de assinantes
+- Planilha (Google Sheets) — gerenciamento da lista de assinantes
 - Frontend — interface web para inscrição e visualização das newsletters
