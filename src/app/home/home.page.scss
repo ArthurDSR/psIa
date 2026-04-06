@@ -1,0 +1,40 @@
+.news-page {
+  padding: 16px;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.news-item {
+  --inner-padding-top: 14px;
+  --inner-padding-bottom: 14px;
+  --inner-padding-end: 4px;
+  margin-bottom: 8px;
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 12px;
+}
+
+.news-meta {
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+  margin: 8px 0;
+}
+
+a {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+}
+
+.newsletter-help {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--ion-color-medium);
+}
+
+.feedback-message {
+  margin: 8px 0;
+}

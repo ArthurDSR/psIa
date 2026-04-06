@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Noticias de IA - Ultimos 7 dias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="loadNews($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="news-page">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Receber newsletter</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="newsletter-help">Coloca seu email para receber novidades de IA.</p>
+        <ion-item>
+          <ion-label position="stacked">Seu email</ion-label>
+          <ion-input
+            type="email"
+            placeholder="exemplo@faculdade.com"
+            [(ngModel)]="newsletterEmail"
+            [value]="newsletterEmail"
+          ></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="newsletterError">
+          <p class="feedback-message">{{ newsletterError }}</p>
+        </ion-text>
+        <ion-text color="success" *ngIf="newsletterSuccess">
+          <p class="feedback-message">{{ newsletterSuccess }}</p>
+        </ion-text>
+        <ion-button
+          expand="block"
+          (click)="subscribeNewsletter()"
+          [disabled]="isSubmittingNewsletter"
+        >
+          {{ isSubmittingNewsletter ? 'Inscrevendo...' : 'Quero me inscrever' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="isLoading">
+      <ion-card-content class="status-row">
+        <ion-spinner name="crescent"></ion-spinner>
+        <span>Carregando as ultimas noticias de IA...</span>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="!isLoading && errorMessage" color="danger">
+      <ion-card-header>
+        <ion-card-title>Falha ao buscar noticias</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ errorMessage }}</p>
+        <ion-button fill="outline" color="light" (click)="loadNews()">Tentar de novo</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="!isLoading && !errorMessage && news.length === 0">
+      <ion-card-header>
+        <ion-card-title>Ainda nao chegou noticia recente</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Assim que o webhook mandar noticias da ultima semana, elas aparecem aqui.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list *ngIf="!isLoading && !errorMessage && news.length > 0" lines="none">
+      <ion-item *ngFor="let item of news; trackBy: trackByUrl" class="news-item">
+        <ion-label>
+          <h2>{{ item.title }}</h2>
+          <p class="news-meta">
+            <span *ngIf="item.source">{{ item.source }} - </span>
+            {{ item.publishedAt | date: 'mediumDate' }}
+          </p>
+          <p *ngIf="item.summary">{{ item.summary }}</p>
+          <a [href]="item.url" target="_blank" rel="noopener noreferrer">Ler noticia completa</a>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
