@@ -16,4 +16,4 @@ O **psIa** é um fluxo de automação criado no [n8n](https://n8n.io/) que envia
 
 - [n8n](https://n8n.io/) — plataforma de automação de fluxos de trabalho
 - Planilha (Google Sheets) — gerenciamento da lista de assinantes
-- Frontend — interface web para inscrição e visualização das newsletters
+- Frontend — interface webem ionic para inscrição e visualização das newsletters
